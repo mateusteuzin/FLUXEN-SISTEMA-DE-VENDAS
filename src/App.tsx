@@ -12,8 +12,8 @@ import Produtos from "@/pages/Produtos";
 import Vendas from "@/pages/Vendas";
 import Estoque from "@/pages/Estoque";
 import NotasFiscais from "@/pages/NotasFiscais";
-import Relatorios from "@/pages/Relatorios"; // Removido acento
-import Configuracoes from "@/pages/Configuracoes"; // Removido acento
+import Relatorios from "@/pages/Relatorios"; // Correto: sem acento no arquivo
+import Configuracoes from "@/pages/Configuracoes"; // Correto: sem acento no arquivo
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -42,8 +42,11 @@ const AppRoutes = () => (
     <Route path="/vendas" element={<ProtectedRoute><Vendas /></ProtectedRoute>} />
     <Route path="/estoque" element={<ProtectedRoute><Estoque /></ProtectedRoute>} />
     <Route path="/notas-fiscais" element={<ProtectedRoute><NotasFiscais /></ProtectedRoute>} />
+    
+    {/* IMPORTANTE: Estes caminhos devem bater com o link da sua Sidebar */}
     <Route path="/relatorios" element={<ProtectedRoute><Relatorios /></ProtectedRoute>} />
     <Route path="/configuracoes" element={<ProtectedRoute><Configuracoes /></ProtectedRoute>} />
+    
     <Route path="/cadastros/*" element={<ProtectedRoute><Navigate to="/" replace /></ProtectedRoute>} />
     <Route path="/servicos" element={<ProtectedRoute><Navigate to="/" replace /></ProtectedRoute>} />
     <Route path="/orcamentos" element={<ProtectedRoute><Navigate to="/" replace /></ProtectedRoute>} />

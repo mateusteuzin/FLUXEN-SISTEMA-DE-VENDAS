@@ -46,13 +46,13 @@ const navGroups: NavGroup[] = [
     items: [
       { label: 'Financeiro', to: '/financeiro', icon: Wallet, activePaths: ['/financeiro', '/caixa'] },
       { label: 'Notas fiscais', to: '/notas-fiscais', icon: Receipt },
-      { label: 'Relatórios', to: '/relatórios', icon: BarChart3 },
+      { label: 'Relatórios', to: '/relatorios', icon: BarChart3 },
     ],
   },
   {
     label: 'Sistema',
     items: [
-      { label: 'Configurações', to: '/configurações', icon: Settings },
+      { label: 'Configurações', to: '/configuracoes', icon: Settings },
     ],
   },
 ];
@@ -66,7 +66,6 @@ const isItemActive = (pathname: string, item: NavItem) => {
   if (item.activePaths?.some((path) => matchesPath(pathname, path))) {
     return true;
   }
-
   return item.to ? matchesPath(pathname, item.to) : false;
 };
 
@@ -87,8 +86,7 @@ function SidebarNav({
         <Link
           to="/"
           onClick={onNavigate}
-          aria-label="Ir para o dashboard"
-          className="flex w-full justify-center rounded-[28px] transition-transform duration-200 hover:scale-[1.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60"
+          className="flex w-full justify-center rounded-[28px] transition-transform duration-200 hover:scale-[1.01]"
         >
           <BrandLogo className="h-[118px] w-full max-w-[222px]" />
         </Link>
@@ -114,7 +112,6 @@ function SidebarNav({
             <div className="space-y-1.5">
               {group.items.map((item) => {
                 const active = isItemActive(pathname, item);
-
                 if (!item.to) return null;
 
                 return (
@@ -125,7 +122,7 @@ function SidebarNav({
                     className={cn(
                       'group flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition-all duration-200',
                       active
-                        ? 'bg-gradient-to-r from-blue-500/20 to-blue-500/5 text-white ring-1 ring-inset ring-blue-400/30 shadow-lg shadow-blue-950/20'
+                        ? 'bg-gradient-to-r from-blue-500/20 to-blue-500/5 text-white ring-1 ring-inset ring-blue-400/30'
                         : 'text-slate-300 hover:bg-white/5 hover:text-white',
                     )}
                   >
@@ -171,10 +168,7 @@ export default function AppSidebar() {
 
   const userEmail = user?.email ?? 'conta@empresa.com';
 
-  const handleNavigate = () => {
-    setMobileOpen(false);
-  };
-
+  const handleNavigate = () => setMobileOpen(false);
   const handleSignOut = () => {
     setMobileOpen(false);
     void signOut();
@@ -193,33 +187,22 @@ export default function AppSidebar() {
 
       <div className="sticky top-0 z-20 border-b border-slate-200/70 bg-white/90 backdrop-blur md:hidden">
         <div className="flex items-center justify-between px-4 py-4">
-          <Link
-            to="/"
-            onClick={handleNavigate}
-            aria-label="Ir para o dashboard"
-            className="inline-flex rounded-[24px] transition-transform duration-200 hover:scale-[1.01]"
-          >
+          <Link to="/" onClick={handleNavigate}>
             <BrandLogo className="h-[68px] w-[192px]" />
           </Link>
-
           <Button
-            type="button"
             variant="outline"
             size="icon"
-            className="rounded-xl border-slate-200 bg-white text-slate-700 shadow-sm"
             onClick={() => setMobileOpen(true)}
+            className="rounded-xl border-slate-200 bg-white"
           >
             <Menu className="h-5 w-5" />
-            <span className="sr-only">Abrir menu</span>
           </Button>
         </div>
       </div>
 
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-        <SheetContent
-          side="left"
-          className="no-scrollbar w-[250px] overflow-y-auto overflow-x-hidden border-r border-white/10 bg-slate-950 p-0 text-slate-50 sm:max-w-[250px] [&>button]:right-4 [&>button]:top-5 [&>button]:rounded-full [&>button]:border [&>button]:border-white/10 [&>button]:bg-white/5 [&>button]:text-slate-400 [&>button]:ring-0 [&>button]:hover:bg-white/10 [&>button]:hover:text-white"
-        >
+        <SheetContent side="left" className="w-[250px] bg-slate-950 p-0">
           <SheetTitle className="sr-only">Menu principal</SheetTitle>
           <SidebarNav
             pathname={location.pathname}
