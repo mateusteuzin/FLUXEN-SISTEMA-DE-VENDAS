@@ -35,7 +35,7 @@ export type Database = {
         Insert: {
           categoria?: string | null
           created_at?: string
-          descricao?: string | null
+          descrição?: string | null
           forma_pagamento?: string | null
           id?: string
           origem?: string | null
@@ -52,7 +52,7 @@ export type Database = {
         Update: {
           categoria?: string | null
           created_at?: string
-          descricao?: string | null
+          descrição?: string | null
           forma_pagamento?: string | null
           id?: string
           origem?: string | null
@@ -106,7 +106,7 @@ export type Database = {
           created_at?: string
           id?: string
           nome: string
-          preco?: number
+          preço?: number
           quantidade?: number
           updated_at?: string
           user_id: string
@@ -115,7 +115,7 @@ export type Database = {
           created_at?: string
           id?: string
           nome?: string
-          preco?: number
+          preço?: number
           quantidade?: number
           updated_at?: string
           user_id?: string

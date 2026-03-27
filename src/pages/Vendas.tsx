@@ -28,8 +28,8 @@ const paymentOptions: Array<{
 }> = [
   { value: 'dinheiro', label: 'Dinheiro', defaultTax: '0' },
   { value: 'pix', label: 'Pix', defaultTax: '0' },
-  { value: 'debito', label: 'Debito', defaultTax: '1.99' },
-  { value: 'credito', label: 'Credito', defaultTax: '3.99' },
+  { value: 'débito', label: 'Débito', defaultTax: '1.99' },
+  { value: 'crédito', label: 'Crédito', defaultTax: '3.99' },
 ];
 
 const formatCurrency = (value: number) => (
@@ -40,7 +40,7 @@ const formatCurrency = (value: number) => (
 );
 
 const formatPaymentMethod = (value: CaixaPaymentMethod | null) => {
-  if (!value) return 'Nao informado';
+  if (!value) return 'Não informado';
 
   const option = paymentOptions.find((item) => item.value === value);
   return option?.label ?? value;
@@ -83,7 +83,7 @@ export default function Vendas() {
       const data = await listProdutos(user.id);
       setProdutos(data);
     } catch (error: any) {
-      toast.error(error.message || 'Nao foi possivel carregar os produtos.');
+      toast.error(error.message || 'Não foi possivel carregar os produtos.');
     }
   };
 
@@ -94,7 +94,7 @@ export default function Vendas() {
       const data = await listVendasPorData(user.id, dataFiltro);
       setVendas(data);
     } catch (error: any) {
-      toast.error(error.message || 'Nao foi possivel carregar as vendas.');
+      toast.error(error.message || 'Não foi possivel carregar as vendas.');
     }
   };
 

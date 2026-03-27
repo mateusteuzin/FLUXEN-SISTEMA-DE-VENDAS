@@ -33,7 +33,7 @@ interface NavGroup {
 
 const navGroups: NavGroup[] = [
   {
-    label: 'Gestao',
+    label: 'Gestão',
     items: [
       { label: 'Dashboard', to: '/', icon: LayoutDashboard },
       { label: 'Vendas', to: '/vendas', icon: ShoppingCart },
@@ -46,13 +46,13 @@ const navGroups: NavGroup[] = [
     items: [
       { label: 'Financeiro', to: '/financeiro', icon: Wallet, activePaths: ['/financeiro', '/caixa'] },
       { label: 'Notas fiscais', to: '/notas-fiscais', icon: Receipt },
-      { label: 'Relatorios', to: '/relatorios', icon: BarChart3 },
+      { label: 'Relatórios', to: '/relatórios', icon: BarChart3 },
     ],
   },
   {
     label: 'Sistema',
     items: [
-      { label: 'Configuracoes', to: '/configuracoes', icon: Settings },
+      { label: 'Configurações', to: '/configurações', icon: Settings },
     ],
   },
 ];
@@ -95,7 +95,7 @@ function SidebarNav({
 
         <div className="mt-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-500">
-            Usuario logado
+            Usuário logado
           </p>
           <p className="mt-1 truncate text-sm text-slate-300">{userEmail}</p>
         </div>

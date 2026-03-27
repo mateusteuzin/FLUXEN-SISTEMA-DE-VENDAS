@@ -188,7 +188,7 @@ export default function NotasFiscais() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Numero</TableHead>
+                <TableHead>Número</TableHead>
                 <TableHead>Cliente</TableHead>
                 <TableHead>Tipo</TableHead>
                 <TableHead>Serie</TableHead>
@@ -196,7 +196,7 @@ export default function NotasFiscais() {
                 <TableHead>Vencimento</TableHead>
                 <TableHead>Valor</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead className="text-right">Acao</TableHead>
+                <TableHead className="text-right">Ação</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

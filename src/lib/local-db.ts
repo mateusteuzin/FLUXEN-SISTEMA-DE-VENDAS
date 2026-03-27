@@ -25,13 +25,13 @@ export interface ProdutoRecord {
   updated_at: string;
 }
 
-export type CaixaFormaPagamento = 'dinheiro' | 'pix' | 'debito' | 'credito';
+export type CaixaFormaPagamento = 'dinheiro' | 'pix' | 'débito' | 'crédito';
 export type CaixaOrigem = 'manual' | 'venda';
 
 export interface CaixaRecord {
   id: string;
   user_id: string;
-  tipo: 'entrada' | 'saida' | 'sangria';
+  tipo: 'entrada' | 'saída' | 'sangria';
   valor: number;
   descricao: string | null;
   origem: CaixaOrigem | null;
@@ -223,7 +223,7 @@ export const signInLocal = (email: string, password: string): AppSession => {
   );
 
   if (!user) {
-    throw new Error('Email ou senha invalidos.');
+    throw new Error('Email ou senha inválidos.');
   }
 
   const session: AppSession = {
@@ -243,7 +243,7 @@ export const signUpLocal = (email: string, password: string): AppSession => {
   const exists = db.users.some((item) => item.email === normalizedEmail);
 
   if (exists) {
-    throw new Error('Ja existe uma conta com esse email.');
+    throw new Error('Já existe uma conta com esse email.');
   }
 
   const now = new Date().toISOString();
@@ -298,7 +298,7 @@ export const saveLocalProduto = (
 
   if (editId) {
     const index = db.produtos.findIndex((item) => item.id === editId && item.user_id === userId);
-    if (index === -1) throw new Error('Produto nao encontrado.');
+    if (index === -1) throw new Error('Produto não encontrado.');
 
     db.produtos[index] = {
       ...db.produtos[index],
@@ -437,7 +437,7 @@ export const finalizeLocalVendaComPagamento = (
     );
 
     if (!produto) {
-      throw new Error('Produto nao encontrado.');
+      throw new Error('Produto não encontrado.');
     }
 
     if (cartItem.qtd > produto.quantidade) {
@@ -455,7 +455,7 @@ export const finalizeLocalVendaComPagamento = (
     );
 
     if (!produto) {
-      throw new Error('Produto nao encontrado.');
+      throw new Error('Produto não encontrado.');
     }
 
     const subtotal = Number(produto.preco) * cartItem.qtd;

@@ -55,9 +55,9 @@ const monthlyChartConfig = {
 const paymentChartConfig = {
   dinheiro: { label: 'Dinheiro', color: '#0F766E' },
   pix: { label: 'Pix', color: '#10B981' },
-  debito: { label: 'Debito', color: '#F59E0B' },
-  credito: { label: 'Credito', color: '#334155' },
-  nao_informado: { label: 'Nao informado', color: '#CBD5E1' },
+  debito: { label: 'Débito', color: '#F59E0B' },
+  credito: { label: 'Crédito', color: '#334155' },
+  nao_informado: { label: 'Não informado', color: '#CBD5E1' },
 } as const;
 
 const WHATSAPP_PHONE_STORAGE_KEY = 'gestor-vendas-pro.whatsapp-phone';
@@ -90,7 +90,7 @@ const getInventoryStatusText = (produto: InventoryProductInsight, staleDaysThres
 
 const buildWhatsAppMessage = (companyName: string, report: SalesReportSummary) => {
   const lucroLabel = report.period === 'daily' ? 'Lucro estimado do dia' : 'Lucro estimado da semana';
-  const paymentLine = report.topPaymentMethod ? `Forma de pagamento em destaque: ${report.topPaymentMethod}` : 'Forma de pagamento em destaque: sem vendas no periodo';
+  const paymentLine = report.topPaymentMethod ? `Forma de pagamento em destaque: ${report.topPaymentMethod}` : 'Forma de pagamento em destaque: sem vendas no período';
   return [
     `${companyName} - ${report.title}`,
     `Periodo: ${report.rangeLabel}`, '',
@@ -152,7 +152,7 @@ export default function Dashboard() {
         setSalesIntelligence(nextSalesIntelligence); setEmpresaNome(nextEmpresaNome);
         setDailyReport(nextDailyReport); setWeeklyReport(nextWeeklyReport);
       } catch (error: any) {
-        toast.error(error.message || 'Nao foi possivel carregar o dashboard.');
+        toast.error(error.message || 'Não foi possivel carregar o dashboard.');
       }
     };
     fetchDashboard();
@@ -168,7 +168,7 @@ export default function Dashboard() {
 
   const inventoryCards = [
     { title: 'Unidades Em Estoque', value: (inventoryInsights?.totalUnits ?? 0).toString(), helper: 'Total disponivel para venda', icon: Package, color: 'text-emerald-600' },
-    { title: 'Produto Acabando', value: (inventoryInsights?.lowStockCount ?? 0).toString(), helper: `Ate ${inventoryInsights?.lowStockThreshold ?? 5} unidades`, icon: AlertTriangle, color: 'text-amber-600' },
+    { title: 'Produto Acabando', value: (inventoryInsights?.lowStockCount ?? 0).toString(), helper: `Até ${inventoryInsights?.lowStockThreshold ?? 5} unidades`, icon: AlertTriangle, color: 'text-amber-600' },
     { title: 'Sem Estoque', value: (inventoryInsights?.outOfStockCount ?? 0).toString(), helper: 'Itens zerados no estoque', icon: TrendingDown, color: 'text-rose-600' },
     { title: 'Produto Parado', value: (inventoryInsights?.staleCount ?? 0).toString(), helper: `Sem vendas ha ${inventoryInsights?.staleDaysThreshold ?? 15} dias`, icon: Clock3, color: 'text-slate-700' },
   ] as const;
@@ -183,24 +183,24 @@ export default function Dashboard() {
   
   const reportCards = activeReport ? [
     { title: 'Vendas', value: activeReport.salesCount.toString(), helper: activeReport.rangeLabel, icon: ShoppingCart, color: 'text-primary' },
-    { title: 'Faturamento', value: formatCurrency(activeReport.totalBruto), helper: 'Valor bruto do periodo', icon: TrendingUp, color: 'text-emerald-600' },
+    { title: 'Faturamento', value: formatCurrency(activeReport.totalBruto), helper: 'Valor bruto do período', icon: TrendingUp, color: 'text-emerald-600' },
     { title: 'Lucro Estimado', value: formatCurrency(activeReport.totalLiquido), helper: 'Baseado no valor liquido apos taxas', icon: Wallet, color: 'text-slate-800' },
-    { title: 'Taxas', value: formatCurrency(activeReport.totalTaxas), helper: activeReport.topPaymentMethod ? `Destaque: ${activeReport.topPaymentMethod}` : 'Sem vendas no periodo', icon: BarChart3, color: 'text-amber-600' },
+    { title: 'Taxas', value: formatCurrency(activeReport.totalTaxas), helper: activeReport.topPaymentMethod ? `Destaque: ${activeReport.topPaymentMethod}` : 'Sem vendas no período', icon: BarChart3, color: 'text-amber-600' },
   ] : [];
   
   const intelligenceCards = [
     { title: 'Produto Mais Vendido', value: salesIntelligence?.topProduct?.nome ?? 'Sem vendas', helper: salesIntelligence?.topProduct ? `${salesIntelligence.topProduct.quantidade} unidade(s) | ${formatCurrency(salesIntelligence.topProduct.valor)}` : 'Cadastre vendas para gerar o ranking', icon: Package, color: 'text-primary' },
-    { title: 'Melhor Dia De Vendas', value: salesIntelligence?.bestSalesDay?.label ?? 'Sem dados', helper: salesIntelligence?.bestSalesDay ? `${salesIntelligence.bestSalesDay.vendas} venda(s) | ${formatCurrency(salesIntelligence.bestSalesDay.valor)}` : 'Historico insuficiente ainda', icon: CalendarDays, color: 'text-emerald-600' },
-    { title: 'Horario Com Mais Movimento', value: salesIntelligence?.busiestHour?.label ?? 'Sem dados', helper: salesIntelligence?.busiestHour ? `${salesIntelligence.busiestHour.vendas} venda(s) | ${formatCurrency(salesIntelligence.busiestHour.valor)}` : 'Historico insuficiente ainda', icon: Clock3, color: 'text-amber-600' },
+    { title: 'Melhor Dia De Vendas', value: salesIntelligence?.bestSalesDay?.label ?? 'Sem dados', helper: salesIntelligence?.bestSalesDay ? `${salesIntelligence.bestSalesDay.vendas} venda(s) | ${formatCurrency(salesIntelligence.bestSalesDay.valor)}` : 'Histórico insuficiente ainda', icon: CalendarDays, color: 'text-emerald-600' },
+    { title: 'Horario Com Mais Movimento', value: salesIntelligence?.busiestHour?.label ?? 'Sem dados', helper: salesIntelligence?.busiestHour ? `${salesIntelligence.busiestHour.vendas} venda(s) | ${formatCurrency(salesIntelligence.busiestHour.valor)}` : 'Histórico insuficiente ainda', icon: Clock3, color: 'text-amber-600' },
   ] as const;
 
   const handleCopyReport = async () => {
     if (!reportMessage) return;
     try {
       await navigator.clipboard.writeText(reportMessage);
-      toast.success('Relatorio copiado para envio.');
+      toast.success('Relatório copiado para envio.');
     } catch {
-      toast.error('Nao foi possivel copiar o relatorio.');
+      toast.error('Não foi possivel copiar o relatório.');
     }
   };
 
@@ -213,7 +213,7 @@ export default function Dashboard() {
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold">Dashboard</h1>
-        <p className="text-muted-foreground mt-1">Acompanhe faturamento mensal, melhor periodo e desempenho de vendas</p>
+        <p className="text-muted-foreground mt-1">Acompanhe faturamento mensal, melhor período e desempenho de vendas</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -244,7 +244,7 @@ export default function Dashboard() {
             <span className="text-xs font-medium mt-1">Produtos</span>
           </Button>
         </Link>
-        <Link to="/relatorios">
+        <Link to="/relatórios">
           <Button variant="outline" className="w-full h-16 flex flex-col items-center justify-center gap-1 border-emerald-500/20 hover:border-emerald-500 hover:bg-emerald-500/5">
             <FileText className="w-5 h-5 text-emerald-600" />
             <span className="text-xs font-medium mt-1">Relatórios</span>
@@ -265,24 +265,24 @@ export default function Dashboard() {
             <Card className="shadow-md">
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm text-muted-foreground flex items-center gap-2">
-                  <Trophy className="w-4 h-4 text-amber-500" /> Melhor Mes
+                  <Trophy className="w-4 h-4 text-amber-500" /> Melhor Mês
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-2xl font-bold">{analytics.bestMonth ? formatCurrency(analytics.bestMonth.liquido) : formatCurrency(0)}</p>
-                <p className="text-sm text-muted-foreground mt-1">{analytics.bestMonth ? `${analytics.bestMonth.month} (${analytics.bestMonth.label})` : 'Sem vendas no periodo'}</p>
+                <p className="text-sm text-muted-foreground mt-1">{analytics.bestMonth ? `${analytics.bestMonth.month} (${analytics.bestMonth.label})` : 'Sem vendas no período'}</p>
               </CardContent>
             </Card>
 
             <Card className="shadow-md">
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm text-muted-foreground flex items-center gap-2">
-                  <BarChart3 className="w-4 h-4 text-primary" /> Ultimos 6 Meses
+                  <BarChart3 className="w-4 h-4 text-primary" /> Últimos 6 Meses
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-2xl font-bold">{formatCurrency(analytics.totalLiquidoPeriod)}</p>
-                <p className="text-sm text-muted-foreground mt-1">{analytics.totalSalesPeriod} venda(s) somadas no periodo</p>
+                <p className="text-sm text-muted-foreground mt-1">{analytics.totalSalesPeriod} venda(s) somadas no período</p>
               </CardContent>
             </Card>
 
@@ -302,8 +302,8 @@ export default function Dashboard() {
           <div className="grid grid-cols-1 xl:grid-cols-[1.6fr_1fr] gap-4">
             <Card className="shadow-md flex flex-col h-full">
               <CardHeader>
-                <CardTitle>Vendido Por Mes</CardTitle>
-                <p className="text-sm text-muted-foreground">Comparativo entre faturamento bruto e liquido nos ultimos 6 meses</p>
+                <CardTitle>Vendido Por Mês</CardTitle>
+                <p className="text-sm text-muted-foreground">Comparativo entre faturamento bruto e liquido nos últimos 6 meses</p>
               </CardHeader>
               <CardContent className="flex-1 flex flex-col min-h-[380px] w-full pb-4">
                 <ChartContainer config={monthlyChartConfig} className="h-full w-full flex-1">
@@ -341,11 +341,11 @@ export default function Dashboard() {
             <Card className="shadow-md flex flex-col h-full">
               <CardHeader>
                 <CardTitle>Formas De Pagamento</CardTitle>
-                <p className="text-sm text-muted-foreground">Distribuicao das vendas liquidas no mesmo periodo</p>
+                <p className="text-sm text-muted-foreground">Distribuicao das vendas liquidas no mesmo período</p>
               </CardHeader>
               <CardContent className="flex-1 flex flex-col justify-center">
                 {paymentData.length === 0 ? (
-                  <div className="min-h-[300px] flex items-center justify-center text-sm text-muted-foreground">Nenhuma venda registrada ainda para gerar o grafico.</div>
+                  <div className="min-h-[300px] flex items-center justify-center text-sm text-muted-foreground">Nenhuma venda registrada ainda para gerar o gráfico.</div>
                 ) : (
                   <div className="space-y-6">
                     <ChartContainer config={paymentChartConfig} className="mx-auto h-[260px] w-full">
@@ -461,10 +461,10 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Relatorio Automático - Moved DOWN to the bottom */}
+      {/* Relatório Automático - Moved DOWN to the bottom */}
       <div className="space-y-4 pt-8 border-t border-border/40">
         <div>
-          <h2 className="text-xl font-semibold">Relatorio Automatico & WhatsApp</h2>
+          <h2 className="text-xl font-semibold">Relatório Automatico & WhatsApp</h2>
           <p className="text-sm text-muted-foreground mt-1">Gera resumo diario e semanal automaticamente e manda no WhatsApp com um clique.</p>
         </div>
 
@@ -505,7 +505,7 @@ export default function Dashboard() {
                       <div className="space-y-4 rounded-2xl border bg-background/80 p-4">
                         <div>
                           <p className="font-semibold">Envio No WhatsApp</p>
-                          <p className="text-sm text-muted-foreground">Digite o numero com DDD.</p>
+                          <p className="text-sm text-muted-foreground">Digite o número com DDD.</p>
                         </div>
                         <Input value={whatsAppPhone} onChange={(e) => setWhatsAppPhone(e.target.value)} placeholder="5511999999999" className="h-12" />
                         <div className="flex flex-col gap-3 sm:flex-row">
@@ -550,7 +550,7 @@ export default function Dashboard() {
                       <div className="space-y-4 rounded-2xl border bg-background/80 p-4">
                         <div>
                           <p className="font-semibold">Envio No WhatsApp</p>
-                          <p className="text-sm text-muted-foreground">Digite o numero com DDD.</p>
+                          <p className="text-sm text-muted-foreground">Digite o número com DDD.</p>
                         </div>
                         <Input value={whatsAppPhone} onChange={(e) => setWhatsAppPhone(e.target.value)} placeholder="5511999999999" className="h-12" />
                         <div className="flex flex-col gap-3 sm:flex-row">

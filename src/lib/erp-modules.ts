@@ -243,7 +243,7 @@ const buildSeedState = (): ErpModuleState => ({
       id: createId(),
       name: 'Loja Centro Max',
       segment: 'Varejo',
-      city: 'Sao Paulo',
+      city: 'São Paulo',
       email: 'compras@centromax.com.br',
       phone: '(11) 99870-2201',
       status: 'vip',
@@ -278,8 +278,8 @@ const buildSeedState = (): ErpModuleState => ({
     {
       id: createId(),
       name: 'Studio Bela Forma',
-      segment: 'Servicos',
-      city: 'Sao Bernardo',
+      segment: 'Serviços',
+      city: 'São Bernardo',
       email: 'contato@belaforma.com.br',
       phone: '(11) 97452-8130',
       status: 'em_risco',
@@ -322,7 +322,7 @@ const buildSeedState = (): ErpModuleState => ({
     {
       id: createId(),
       name: 'Mercurio Fiscal',
-      category: 'Servicos fiscais',
+      category: 'Serviços fiscais',
       contact: 'Bruno Couto',
       phone: '(31) 99232-7701',
       leadTimeDays: 10,

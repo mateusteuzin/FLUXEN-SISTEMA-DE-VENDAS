@@ -38,7 +38,7 @@ export default function Estoque() {
         setInventoryInsights(inventory);
         setWarehouseName(modules.settings.primaryWarehouse);
       } catch (error) {
-        const message = error instanceof Error ? error.message : 'Nao foi possivel carregar o estoque.';
+        const message = error instanceof Error ? error.message : 'Não foi possivel carregar o estoque.';
         toast.error(message);
       }
     };
@@ -59,7 +59,7 @@ export default function Estoque() {
       <PageHeader
         eyebrow="Estoque"
         title="Central de abastecimento e risco operacional"
-        description="Transforme o estoque em uma mesa de controle com prioridade de reposicao, monitoramento de produtos parados e visao clara do valor armazenado."
+        description="Transforme o estoque em uma mesa de controle com prioridade de reposicao, monitoramento de produtos parados e visão clara do valor armazenado."
         icon={Warehouse}
       >
         <Badge className="rounded-full bg-white/10 px-3 py-1 text-white hover:bg-white/10">{warehouseName}</Badge>
@@ -110,7 +110,7 @@ export default function Estoque() {
                   <TableHead>Estoque</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead>Ultima venda</TableHead>
-                  <TableHead>Preco</TableHead>
+                  <TableHead>Preço</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -151,7 +151,7 @@ export default function Estoque() {
         <div className="space-y-5">
           <Card className="border-slate-200/80 bg-white/90 shadow-sm">
             <CardHeader>
-              <CardTitle>Pontos de atencao</CardTitle>
+              <CardTitle>Pontos de atenção</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="rounded-2xl border border-amber-200 bg-amber-50/80 p-4">

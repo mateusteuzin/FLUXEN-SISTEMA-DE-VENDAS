@@ -80,7 +80,7 @@ export default function Servicos() {
     if (!user) return;
 
     createService(user.id, serviceForm);
-    toast.success('Servico adicionado ao catalogo.');
+    toast.success('Serviço adicionado ao catalogo.');
     setDialogOpen(false);
     setServiceForm({
       name: '',
@@ -98,14 +98,14 @@ export default function Servicos() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="Servicos"
-        title="Catalogo de servicos pronto para venda"
+        eyebrow="Serviços"
+        title="Catalogo de serviços pronto para venda"
         description="Organize ofertas, pacotes recorrentes, SLA e responsaveis em uma vitrine profissional para operacao e demonstracao comercial."
         icon={Wrench}
         actions={(
           <Button className="h-12 rounded-2xl bg-white text-slate-950 hover:bg-slate-100" onClick={() => setDialogOpen(true)}>
             <Plus className="mr-2 h-5 w-5" />
-            Novo servico
+            Novo serviço
           </Button>
         )}
       >
@@ -115,7 +115,7 @@ export default function Servicos() {
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <MetricCard
-          title="Servicos ativos"
+          title="Serviços ativos"
           value={String(moduleState?.services.filter((item) => item.status === 'ativo').length ?? 0)}
           helper="Itens comerciais liberados para venda"
           icon={BriefcaseBusiness}
@@ -131,7 +131,7 @@ export default function Servicos() {
         <MetricCard
           title="Ticket medio"
           value={formatCurrency(avgTicket)}
-          helper="Preco medio do portfolio de servicos"
+          helper="Preço medio do portfolio de serviços"
           icon={LifeBuoy}
           tone="amber"
         />
@@ -153,7 +153,7 @@ export default function Servicos() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Servico</TableHead>
+                  <TableHead>Serviço</TableHead>
                   <TableHead>Categoria</TableHead>
                   <TableHead>Responsavel</TableHead>
                   <TableHead>Duracao</TableHead>
@@ -220,7 +220,7 @@ export default function Servicos() {
             <div className="rounded-2xl bg-slate-950 px-4 py-5 text-white">
               <p className="text-sm font-medium">Pronto para oferecer em proposta</p>
               <p className="mt-2 text-sm text-slate-300">
-                Combine servicos de implantacao, suporte e treinamento para criar pacotes com mais margem e previsibilidade.
+                Combine serviços de implantacao, suporte e treinamento para criar pacotes com mais margem e previsibilidade.
               </p>
             </div>
           </CardContent>
@@ -230,12 +230,12 @@ export default function Servicos() {
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className="sm:max-w-[560px]">
           <DialogHeader>
-            <DialogTitle>Novo servico</DialogTitle>
+            <DialogTitle>Novo serviço</DialogTitle>
           </DialogHeader>
 
           <form onSubmit={handleCreateService} className="grid gap-4 pt-4 md:grid-cols-2">
             <Input
-              placeholder="Nome do servico"
+              placeholder="Nome do serviço"
               value={serviceForm.name}
               onChange={(event) => setServiceForm((current) => ({ ...current, name: event.target.value }))}
               required
@@ -250,7 +250,7 @@ export default function Servicos() {
               type="number"
               step="0.01"
               min="0"
-              placeholder="Preco"
+              placeholder="Preço"
               value={serviceForm.price}
               onChange={(event) => setServiceForm((current) => ({ ...current, price: Number(event.target.value) || 0 }))}
               required
@@ -291,7 +291,7 @@ export default function Servicos() {
               </SelectContent>
             </Select>
             <Select
-              value={serviceForm.recurring ? 'sim' : 'nao'}
+              value={serviceForm.recurring ? 'sim' : 'não'}
               onValueChange={(value) => setServiceForm((current) => ({ ...current, recurring: value === 'sim' }))}
             >
               <SelectTrigger>
@@ -299,12 +299,12 @@ export default function Servicos() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="sim">Recorrente</SelectItem>
-                <SelectItem value="nao">Pontual</SelectItem>
+                <SelectItem value="não">Pontual</SelectItem>
               </SelectContent>
             </Select>
 
             <Button type="submit" className="h-11 w-full rounded-xl md:col-span-2">
-              Salvar servico
+              Salvar serviço
             </Button>
           </form>
         </DialogContent>

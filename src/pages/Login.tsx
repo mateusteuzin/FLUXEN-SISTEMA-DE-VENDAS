@@ -105,7 +105,7 @@ export default function Login() {
             onClick={() => setIsSignUp(!isSignUp)}
             className="w-full mt-4 text-sm text-muted-foreground hover:text-primary transition-colors"
           >
-            {isSignUp ? 'Ja tem conta? Faca login' : 'Nao tem conta? Cadastre-se'}
+            {isSignUp ? 'Já tem conta? Faca login' : 'Não tem conta? Cadastre-se'}
           </button>
         </CardContent>
       </Card>

@@ -49,7 +49,7 @@ export default function Relatorios() {
           inventoryInsights,
         });
       } catch (error) {
-        const message = error instanceof Error ? error.message : 'Nao foi possivel carregar os relatorios.';
+        const message = error instanceof Error ? error.message : 'Não foi possivel carregar os relatórios.';
         toast.error(message);
       }
     };
@@ -76,12 +76,12 @@ export default function Relatorios() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="Relatorios"
+        eyebrow="Relatórios"
         title="Painel gerencial para decisao e demonstracao comercial"
-        description="Cruze vendas, financeiro e estoque em uma leitura clara para apresentar o sistema como produto profissional, sem carregar modulos que ainda nao entraram no MVP."
+        description="Cruze vendas, financeiro e estoque em uma leitura clara para apresentar o sistema como produto profissional, sem carregar modulos que ainda não entraram no MVP."
         icon={BarChart3}
       >
-        <Badge className="rounded-full bg-white/10 px-3 py-1 text-white hover:bg-white/10">Visao executiva</Badge>
+        <Badge className="rounded-full bg-white/10 px-3 py-1 text-white hover:bg-white/10">Visão executiva</Badge>
         <Badge className="rounded-full bg-emerald-400/15 px-3 py-1 text-emerald-100 hover:bg-emerald-400/15">Vendas e operacao</Badge>
       </PageHeader>
 
@@ -103,7 +103,7 @@ export default function Relatorios() {
         <MetricCard
           title="Crescimento mensal"
           value={`${reportState?.analytics.growthPercent?.toFixed(1) ?? 0}%`}
-          helper="Comparativo do mes atual contra o anterior"
+          helper="Comparativo do mês atual contra o anterior"
           icon={TrendingUp}
           tone="amber"
         />
@@ -133,7 +133,7 @@ export default function Relatorios() {
               <p className="mt-1 text-sm text-slate-500">
                 {reportState?.salesIntelligence.topProduct
                   ? `${reportState.salesIntelligence.topProduct.quantidade} unidades | ${formatCurrency(reportState.salesIntelligence.topProduct.valor)}`
-                  : 'Venda ainda nao registrada.'}
+                  : 'Venda ainda não registrada.'}
               </p>
             </div>
 
@@ -148,7 +148,7 @@ export default function Relatorios() {
               <p className="mt-1 text-sm text-slate-500">
                 {reportState?.salesIntelligence.bestSalesDay
                   ? `${reportState.salesIntelligence.bestSalesDay.vendas} venda(s) | ${formatCurrency(reportState.salesIntelligence.bestSalesDay.valor)}`
-                  : 'Aguardando historico.'}
+                  : 'Aguardando histórico.'}
               </p>
             </div>
 
@@ -163,7 +163,7 @@ export default function Relatorios() {
               <p className="mt-1 text-sm text-slate-500">
                 {reportState?.salesIntelligence.busiestHour
                   ? `${reportState.salesIntelligence.busiestHour.vendas} atendimento(s)`
-                  : 'Aguardando historico.'}
+                  : 'Aguardando histórico.'}
               </p>
             </div>
           </CardContent>
@@ -209,7 +209,7 @@ export default function Relatorios() {
 
         <Card className="border-slate-200/80 bg-white/90 shadow-sm">
           <CardHeader>
-            <CardTitle>Vendido por mes</CardTitle>
+            <CardTitle>Vendido por mês</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {(reportState?.analytics.monthlySales ?? []).map((item) => (

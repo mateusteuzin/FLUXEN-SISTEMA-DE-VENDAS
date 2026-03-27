@@ -95,7 +95,7 @@ export default function OrdensServico() {
     if (!user) return;
 
     createServiceOrder(user.id, orderForm);
-    toast.success('Ordem de servico criada.');
+    toast.success('Ordem de serviço criada.');
     setDialogOpen(false);
     setOrderForm({
       client: '',
@@ -118,7 +118,7 @@ export default function OrdensServico() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="Ordens de servico"
+        eyebrow="Ordens de serviço"
         title="Execucao acompanhada como sistema de operacao real"
         description="Controle prioridades, tecnico responsavel, agenda e etapa de cada ordem para transformar suporte e implantacao em um processo vendavel."
         icon={ClipboardList}
@@ -137,7 +137,7 @@ export default function OrdensServico() {
         <MetricCard
           title="OS em aberto"
           value={String(orders.filter((order) => order.status === 'aberta').length)}
-          helper="Itens aguardando inicio de atendimento"
+          helper="Itens aguardando início de atendimento"
           icon={ClipboardList}
           tone="blue"
         />
@@ -158,7 +158,7 @@ export default function OrdensServico() {
         <MetricCard
           title="Receita pendente"
           value={formatCurrency(openValue)}
-          helper="Valor ainda atrelado a ordens nao concluida"
+          helper="Valor ainda atrelado a ordens não concluida"
           icon={Gauge}
           tone="slate"
         />
@@ -175,12 +175,12 @@ export default function OrdensServico() {
                 <TableRow>
                   <TableHead>OS</TableHead>
                   <TableHead>Cliente</TableHead>
-                  <TableHead>Servico</TableHead>
+                  <TableHead>Serviço</TableHead>
                   <TableHead>Tecnico</TableHead>
                   <TableHead>Agenda</TableHead>
                   <TableHead>Prioridade</TableHead>
                   <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Acao</TableHead>
+                  <TableHead className="text-right">Ação</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -248,7 +248,7 @@ export default function OrdensServico() {
                 <p className="text-sm font-medium">Pronto para time de atendimento</p>
               </div>
               <p className="mt-2 text-sm text-slate-300">
-                Use este modulo como base para implantacao, suporte premium e assistencia tecnica com historico por cliente.
+                Use este modulo como base para implantacao, suporte premium e assistencia tecnica com histórico por cliente.
               </p>
             </div>
           </CardContent>
@@ -258,7 +258,7 @@ export default function OrdensServico() {
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className="sm:max-w-[560px]">
           <DialogHeader>
-            <DialogTitle>Nova ordem de servico</DialogTitle>
+            <DialogTitle>Nova ordem de serviço</DialogTitle>
           </DialogHeader>
 
           <form onSubmit={handleCreateOrder} className="grid gap-4 pt-4 md:grid-cols-2">
@@ -269,7 +269,7 @@ export default function OrdensServico() {
               required
             />
             <Input
-              placeholder="Servico"
+              placeholder="Serviço"
               value={orderForm.service}
               onChange={(event) => setOrderForm((current) => ({ ...current, service: event.target.value }))}
               required

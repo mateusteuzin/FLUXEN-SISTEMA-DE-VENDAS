@@ -24,11 +24,11 @@ export default function ModulePlaceholder({ title, description }: ModulePlacehol
             </Badge>
             <h2 className="mt-4 text-xl font-semibold text-slate-900">Area preparada para evolucao do modulo</h2>
             <p className="mt-2 text-sm leading-6 text-slate-600">
-              A navegacao ja esta integrada na sidebar com destaque de item ativo, hierarquia visual e comportamento responsivo.
+              A navegacao já esta integrada na sidebar com destaque de item ativo, hierarquia visual e comportamento responsivo.
             </p>
 
             <div className="mt-5 flex items-center gap-2 text-sm font-medium text-primary">
-              Proximo passo recomendado
+              Próximo passo recomendado
               <ArrowRight className="h-4 w-4" />
               implementar a tela operacional de {title.toLowerCase()}
             </div>

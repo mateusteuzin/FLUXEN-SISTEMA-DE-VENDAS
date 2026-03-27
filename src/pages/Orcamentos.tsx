@@ -88,7 +88,7 @@ export default function Orcamentos() {
     if (!user) return;
 
     createQuote(user.id, quoteForm);
-    toast.success('Orcamento adicionado ao pipeline.');
+    toast.success('Orçamento adicionado ao pipeline.');
     setDialogOpen(false);
     setQuoteForm({
       client: '',
@@ -110,14 +110,14 @@ export default function Orcamentos() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="Orcamentos"
+        eyebrow="Orçamentos"
         title="Pipeline comercial com cara de CRM pago"
         description="Acompanhe propostas, negocie com mais controle e deixe a area comercial pronta para demonstrar valor em reunioes de venda."
         icon={FileSpreadsheet}
         actions={(
           <Button className="h-12 rounded-2xl bg-white text-slate-950 hover:bg-slate-100" onClick={() => setDialogOpen(true)}>
             <Plus className="mr-2 h-5 w-5" />
-            Novo orcamento
+            Novo orçamento
           </Button>
         )}
       >
@@ -136,14 +136,14 @@ export default function Orcamentos() {
         <MetricCard
           title="Aprovado"
           value={formatCurrency(approvedValue)}
-          helper="Valor ja convertido em proposta aceita"
+          helper="Valor já convertido em proposta aceita"
           icon={CheckCircle2}
           tone="emerald"
         />
         <MetricCard
           title="Conversao"
           value={`${approvalRate.toFixed(1)}%`}
-          helper="Percentual de orcamentos aprovados"
+          helper="Percentual de orçamentos aprovados"
           icon={Send}
           tone="amber"
         />
@@ -173,14 +173,14 @@ export default function Orcamentos() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Codigo</TableHead>
+                <TableHead>Código</TableHead>
                 <TableHead>Cliente</TableHead>
                 <TableHead>Consultor</TableHead>
                 <TableHead>Canal</TableHead>
                 <TableHead>Validade</TableHead>
                 <TableHead>Valor</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead className="text-right">Acao</TableHead>
+                <TableHead className="text-right">Ação</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -226,7 +226,7 @@ export default function Orcamentos() {
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className="sm:max-w-[560px]">
           <DialogHeader>
-            <DialogTitle>Novo orcamento</DialogTitle>
+            <DialogTitle>Novo orçamento</DialogTitle>
           </DialogHeader>
 
           <form onSubmit={handleCreateQuote} className="grid gap-4 pt-4 md:grid-cols-2">
@@ -279,7 +279,7 @@ export default function Orcamentos() {
             </Select>
 
             <Button type="submit" className="h-11 w-full rounded-xl md:col-span-2">
-              Salvar orcamento
+              Salvar orçamento
             </Button>
           </form>
         </DialogContent>

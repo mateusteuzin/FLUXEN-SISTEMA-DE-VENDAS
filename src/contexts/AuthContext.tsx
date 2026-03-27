@@ -77,7 +77,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     if (!supabase) {
-      throw new Error('Supabase nao configurado.');
+      throw new Error('Supabase não configurado.');
     }
 
     const { error } = await supabase.auth.signInWithPassword({ email, password });
@@ -93,7 +93,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     if (!supabase) {
-      throw new Error('Supabase nao configurado.');
+      throw new Error('Supabase não configurado.');
     }
 
     const { error } = await supabase.auth.signUp({ email, password });
@@ -109,7 +109,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     if (!supabase) {
-      throw new Error('Supabase nao configurado.');
+      throw new Error('Supabase não configurado.');
     }
 
     const { error } = await supabase.auth.signOut();

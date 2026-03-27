@@ -23,13 +23,13 @@ import {
   type VendaItemRecord,
 } from '@/lib/local-db';
 
-export type Produto = Pick<ProdutoRecord, 'id' | 'nome' | 'preco' | 'quantidade' | 'created_at' | 'updated_at'>;
+export type Produto = Pick<ProdutoRecord, 'id' | 'nome' | 'preço' | 'quantidade' | 'created_at' | 'updated_at'>;
 export type CaixaEntry = Pick<
   CaixaRecord,
   | 'id'
   | 'tipo'
   | 'valor'
-  | 'descricao'
+  | 'descrição'
   | 'created_at'
   | 'origem'
   | 'categoria'
@@ -175,7 +175,7 @@ export interface SalePaymentPayload {
 
 const ensureSupabase = () => {
   if (!supabase) {
-    throw new Error('Supabase nao configurado. Use o modo local ou preencha o arquivo .env.');
+    throw new Error('Supabase não configurado. Use o modo local ou preencha o arquivo .env.');
   }
 
   return supabase;
@@ -184,9 +184,9 @@ const ensureSupabase = () => {
 const paymentLabels: Record<string, string> = {
   dinheiro: 'Dinheiro',
   pix: 'Pix',
-  debito: 'Debito',
-  credito: 'Credito',
-  nao_informado: 'Nao informado',
+  debito: 'Débito',
+  credito: 'Crédito',
+  nao_informado: 'Não informado',
 };
 
 const LOW_STOCK_THRESHOLD = 5;
@@ -697,7 +697,7 @@ export const getInventoryInsights = async (userId: string): Promise<InventoryIns
   ] = await Promise.all([
     client
       .from('produtos')
-      .select('id,nome,preco,quantidade,created_at,updated_at')
+      .select('id,nome,preço,quantidade,created_at,updated_at')
       .order('nome'),
     client
       .from('vendas')
@@ -963,7 +963,7 @@ export const updateVenda = async (
   if (insertError) throw insertError;
 
   // 6. Update caixa
-  const { data: caixaEntry } = await client.from('caixa').select('id').eq('user_id', userId).eq('descricao', `Venda #${vendaId.slice(0, 8)}`).maybeSingle();
+  const { data: caixaEntry } = await client.from('caixa').select('id').eq('user_id', userId).eq('descrição', `Venda #${vendaId.slice(0, 8)}`).maybeSingle();
   
   if (caixaEntry) {
     const { error: caixaError } = await client.from('caixa').update({

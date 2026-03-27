@@ -33,8 +33,8 @@ const paymentOptions: Array<{
 }> = [
   { value: 'dinheiro', label: 'Dinheiro', defaultTax: '0' },
   { value: 'pix', label: 'Pix', defaultTax: '0' },
-  { value: 'debito', label: 'Debito', defaultTax: '1.99' },
-  { value: 'credito', label: 'Credito', defaultTax: '3.99' },
+  { value: 'débito', label: 'Débito', defaultTax: '1.99' },
+  { value: 'crédito', label: 'Crédito', defaultTax: '3.99' },
 ];
 
 const formatCurrency = (value: number) => (

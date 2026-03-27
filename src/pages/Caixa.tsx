@@ -36,8 +36,8 @@ const formatCurrency = (value: number) => (
 const formatPaymentMethod = (value: CaixaEntry['forma_pagamento']) => {
   if (!value) return null;
 
-  if (value === 'credito') return 'Credito';
-  if (value === 'debito') return 'Debito';
+  if (value === 'crédito') return 'Crédito';
+  if (value === 'débito') return 'Débito';
   if (value === 'pix') return 'Pix';
   return 'Dinheiro';
 };
@@ -48,7 +48,7 @@ export default function Caixa() {
   const [tipo, setTipo] = useState('entrada');
   const [categoria, setCategoria] = useState('suprimento');
   const [valor, setValor] = useState('');
-  const [descricao, setDescricao] = useState('');
+  const [descrição, setDescricao] = useState('');
   const [loading, setLoading] = useState(false);
 
   const currentCategories = useMemo(
@@ -67,7 +67,7 @@ export default function Caixa() {
       const data = await listCaixaEntries(user.id);
       setEntries(data);
     } catch (error: any) {
-      toast.error(error.message || 'Nao foi possivel carregar o financeiro.');
+      toast.error(error.message || 'Não foi possivel carregar o financeiro.');
     }
   };
 
@@ -87,7 +87,7 @@ export default function Caixa() {
 
     const valorNumero = Number.parseFloat(valor) || 0;
     if (valorNumero <= 0) {
-      toast.error('Informe um valor valido.');
+      toast.error('Informe um valor válido.');
       return;
     }
 
@@ -97,7 +97,7 @@ export default function Caixa() {
       await addCaixaEntry(user.id, {
         tipo: tipo as CaixaEntry['tipo'],
         valor: valorNumero,
-        descricao: descricao.trim() || null,
+        descricao: descrição.trim() || null,
         origem: 'manual',
         categoria,
         valor_bruto: valorNumero,
@@ -119,7 +119,7 @@ export default function Caixa() {
 
   const tipoIcon = (value: string) => {
     if (value === 'entrada') return <ArrowUpCircle className="w-5 h-5 text-success" />;
-    if (value === 'saida') return <ArrowDownCircle className="w-5 h-5 text-destructive" />;
+    if (value === 'saída') return <ArrowDownCircle className="w-5 h-5 text-destructive" />;
     return <Scissors className="w-5 h-5 text-warning" />;
   };
 
@@ -149,7 +149,7 @@ export default function Caixa() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="entrada">Entrada manual</SelectItem>
-                  <SelectItem value="saida">Saida manual</SelectItem>
+                  <SelectItem value="saída">Saída manual</SelectItem>
                   <SelectItem value="sangria">Sangria</SelectItem>
                 </SelectContent>
               </Select>
@@ -179,8 +179,8 @@ export default function Caixa() {
               />
 
               <Input
-                placeholder="Descricao"
-                value={descricao}
+                placeholder="Descrição"
+                value={descrição}
                 onChange={(e) => setDescricao(e.target.value)}
                 className="h-12"
               />
@@ -202,7 +202,7 @@ export default function Caixa() {
 
       <Card className="shadow-md">
         <CardHeader>
-          <CardTitle className="text-lg">Historico Financeiro</CardTitle>
+          <CardTitle className="text-lg">Histórico Financeiro</CardTitle>
         </CardHeader>
 
         <CardContent>
@@ -229,7 +229,7 @@ export default function Caixa() {
                       </div>
 
                       <p className="text-xs text-muted-foreground mt-1">
-                        {entry.descricao || 'Sem descricao'} - {new Date(entry.created_at).toLocaleString('pt-BR')}
+                        {entry.descricao || 'Sem descrição'} - {new Date(entry.created_at).toLocaleString('pt-BR')}
                       </p>
 
                       {entry.origem === 'venda' && (

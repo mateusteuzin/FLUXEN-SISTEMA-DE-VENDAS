@@ -12,8 +12,8 @@ import Produtos from "@/pages/Produtos";
 import Vendas from "@/pages/Vendas";
 import Estoque from "@/pages/Estoque";
 import NotasFiscais from "@/pages/NotasFiscais";
-import Relatorios from "@/pages/Relatorios";
-import Configuracoes from "@/pages/Configuracoes";
+import Relatorios from "@/pages/Relatorios"; // Removido acento
+import Configuracoes from "@/pages/Configuracoes"; // Removido acento
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();

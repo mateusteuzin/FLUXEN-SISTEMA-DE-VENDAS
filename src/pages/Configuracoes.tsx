@@ -23,7 +23,7 @@ export default function Configuracoes() {
   const handleSave = () => {
     if (!user || !settings) return;
     saveSystemSettings(user.id, settings);
-    toast.success('Configuracoes salvas com sucesso.');
+    toast.success('Configurações salvas com sucesso.');
   };
 
   if (!settings) {
@@ -33,14 +33,14 @@ export default function Configuracoes() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="Configuracoes"
+        eyebrow="Configurações"
         title="Ajustes para deixar o sistema pronto para venda"
         description="Centralize identidade da empresa, automacoes e parametros operacionais em um unico painel com aparencia de software pago, focado no MVP atual."
         icon={Cog}
         actions={(
           <Button className="h-12 rounded-2xl bg-white text-slate-950 hover:bg-slate-100" onClick={handleSave}>
             <Save className="mr-2 h-5 w-5" />
-            Salvar configuracoes
+            Salvar configurações
           </Button>
         )}
       >
@@ -99,7 +99,7 @@ export default function Configuracoes() {
               <Input
                 type="number"
                 min="1"
-                placeholder="Prazo padrao"
+                placeholder="Prazo padrão"
                 value={settings.defaultPaymentTermDays}
                 onChange={(event) => setSettings((current) => current ? { ...current, defaultPaymentTermDays: Number(event.target.value) || 1 } : current)}
               />
@@ -156,7 +156,7 @@ export default function Configuracoes() {
 
               <div className="flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50/70 px-4 py-3">
                 <div>
-                  <p className="font-medium text-slate-900">Relatorios por WhatsApp</p>
+                  <p className="font-medium text-slate-900">Relatórios por WhatsApp</p>
                   <p className="text-sm text-slate-500">Entrega de indicadores para gestores e clientes.</p>
                 </div>
                 <Switch
@@ -175,8 +175,8 @@ export default function Configuracoes() {
               {[
                 'Layout com navegacao lateral estilo ERP',
                 'Modulos de venda, financeiro e estoque ativos',
-                'Base fiscal e relatorios pronta para demonstracao',
-                'Configuracoes persistidas por usuario',
+                'Base fiscal e relatórios pronta para demonstracao',
+                'Configurações persistidas por usuário',
               ].map((item) => (
                 <div key={item} className="rounded-2xl border border-emerald-200 bg-emerald-50/80 px-4 py-3 text-sm text-emerald-900">
                   {item}

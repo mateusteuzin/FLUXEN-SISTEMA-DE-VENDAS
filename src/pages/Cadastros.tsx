@@ -195,7 +195,7 @@ export default function Cadastros() {
   }[activeTab];
 
   const currentDescription = {
-    clientes: 'Centralize carteira, oportunidade aberta e historico de faturamento para facilitar follow-up comercial.',
+    clientes: 'Centralize carteira, oportunidade aberta e histórico de faturamento para facilitar follow-up comercial.',
     fornecedores: 'Organize contatos de abastecimento, lead time e nivel de risco para comprar melhor e com menos ruptura.',
     categorias: 'Estruture margens, linhas e mix de produtos para operar com mais previsibilidade e uma leitura profissional do portifolio.',
   }[activeTab];
@@ -248,12 +248,12 @@ export default function Cadastros() {
             <MetricCard
               title="Carteira acumulada"
               value={formatCurrency(totalWallet)}
-              helper="Volume historico registrado nos cadastros"
+              helper="Volume histórico registrado nos cadastros"
               icon={TrendingUp}
               tone="amber"
             />
             <MetricCard
-              title="Orcamentos em aberto"
+              title="Orçamentos em aberto"
               value={String(moduleState?.customers.reduce((acc, customer) => acc + customer.openQuotes, 0) ?? 0)}
               helper="Oportunidades conectadas ao comercial"
               icon={Building2}
@@ -273,7 +273,7 @@ export default function Cadastros() {
                     <TableHead>Segmento</TableHead>
                     <TableHead>Cidade</TableHead>
                     <TableHead>Status</TableHead>
-                    <TableHead>Ultimo pedido</TableHead>
+                    <TableHead>Último pedido</TableHead>
                     <TableHead>Carteira</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -420,7 +420,7 @@ export default function Cadastros() {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Categoria</TableHead>
-                    <TableHead>Codigo</TableHead>
+                    <TableHead>Código</TableHead>
                     <TableHead>Itens</TableHead>
                     <TableHead>Margem alvo</TableHead>
                     <TableHead>Status</TableHead>
@@ -577,7 +577,7 @@ export default function Cadastros() {
                   required
                 />
                 <Input
-                  placeholder="Codigo"
+                  placeholder="Código"
                   value={categorias.code}
                   onChange={(event) => setCategorias((current) => ({ ...current, code: event.target.value.toUpperCase() }))}
                   required

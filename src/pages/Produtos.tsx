@@ -48,7 +48,7 @@ export default function Produtos() {
   const { user } = useAuth();
   const [inventoryInsights, setInventoryInsights] = useState<InventoryInsights | null>(null);
   const [nome, setNome] = useState('');
-  const [preco, setPreco] = useState('');
+  const [preço, setPreco] = useState('');
   const [quantidade, setQuantidade] = useState('');
   const [editId, setEditId] = useState<string | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -65,7 +65,7 @@ export default function Produtos() {
       const data = await getInventoryInsights(user.id);
       setInventoryInsights(data);
     } catch (error: any) {
-      toast.error(error.message || 'Nao foi possivel carregar os produtos.');
+      toast.error(error.message || 'Não foi possivel carregar os produtos.');
     }
   };
 
@@ -93,7 +93,7 @@ export default function Produtos() {
         user.id,
         {
           nome,
-          preco: parseFloat(preco),
+          preco: parseFloat(preço),
           quantidade: parseInt(quantidade, 10),
         },
         editId || undefined,
@@ -104,7 +104,7 @@ export default function Produtos() {
       setDialogOpen(false);
       await fetchProdutos();
     } catch (error: any) {
-      toast.error(error.message || 'Nao foi possivel salvar o produto.');
+      toast.error(error.message || 'Não foi possivel salvar o produto.');
     } finally {
       setLoading(false);
     }
@@ -124,10 +124,10 @@ export default function Produtos() {
 
     try {
       await removeProduto(user.id, id);
-      toast.success('Produto excluido!');
+      toast.success('Produto excluído!');
       await fetchProdutos();
     } catch (error: any) {
-      toast.error(error.message || 'Nao foi possivel excluir o produto.');
+      toast.error(error.message || 'Não foi possivel excluir o produto.');
     }
   };
 
@@ -149,7 +149,7 @@ export default function Produtos() {
     {
       title: 'Produto Acabando',
       value: (inventoryInsights?.lowStockCount ?? 0).toString(),
-      helper: `Ate ${inventoryInsights?.lowStockThreshold ?? 5} unidades`,
+      helper: `Até ${inventoryInsights?.lowStockThreshold ?? 5} unidades`,
       icon: AlertTriangle,
       tone: 'text-amber-600',
     },
@@ -200,8 +200,8 @@ export default function Produtos() {
                 type="number"
                 step="0.01"
                 min="0"
-                placeholder="Preco (R$)"
-                value={preco}
+                placeholder="Preço (R$)"
+                value={preço}
                 onChange={(e) => setPreco(e.target.value)}
                 className="h-12"
                 required
@@ -216,7 +216,7 @@ export default function Produtos() {
                 required
               />
               <Button type="submit" className="w-full h-12" disabled={loading}>
-                {editId ? 'Salvar alteracoes' : 'Cadastrar produto'}
+                {editId ? 'Salvar alterações' : 'Cadastrar produto'}
               </Button>
             </form>
           </DialogContent>
@@ -245,7 +245,7 @@ export default function Produtos() {
               <AlertTriangle className="h-5 w-5 text-amber-600" /> Estoque Inteligente
             </CardTitle>
             <p className="text-sm text-muted-foreground">
-              {highlightedProducts.length} produto(s) precisam de atencao agora.
+              {highlightedProducts.length} produto(s) precisam de atenção agora.
             </p>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-2">
