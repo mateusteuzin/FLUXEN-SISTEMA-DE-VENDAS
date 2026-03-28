@@ -18,6 +18,7 @@ interface AuthContextType {
   signUp: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -43,7 +44,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const mapSession = (value: { user: { id: string; email?: string | null } } | null): AppSession | null => {
       if (!value?.user) return null;
-
       return {
         user: {
           id: value.user.id,
@@ -77,10 +77,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    if (!supabase) {
-      throw new Error('Supabase nao configurado.');
-    }
-
+    if (!supabase) throw new Error('Supabase não configurado.');
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) throw error;
   };
@@ -91,10 +88,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    if (!supabase) {
-      throw new Error('Supabase nao configurado.');
-    }
-
+    if (!supabase) throw new Error('Supabase não configurado.');
     const { error } = await supabase.auth.signUp({ email, password });
     if (error) throw error;
   };
@@ -107,22 +101,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    if (!supabase) {
-      throw new Error('Supabase nao configurado.');
-    }
-
+    if (!supabase) throw new Error('Supabase não configurado.');
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
   };
 
   const resetPassword = async (email: string) => {
-    if (isLocalMode) {
-      return;
-    }
-
-    if (!supabase) {
-      throw new Error('Supabase nao configurado.');
-    }
+    if (isLocalMode) return;
+    if (!supabase) throw new Error('Supabase não configurado.');
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/reset-password`,
@@ -130,8 +116,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (error) throw error;
   };
 
+  const signInWithGoogle = async () => {
+    if (isLocalMode) {
+      throw new Error('Login com Google não disponível no modo local. Use email e senha.');
+    }
+
+    if (!supabase) throw new Error('Supabase não configurado.');
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/dashboard`,
+        queryParams: {
+          access_type: 'offline',
+          prompt: 'consent',
+        },
+      },
+    });
+    if (error) throw error;
+  };
+
   return (
-    <AuthContext.Provider value={{ session, user, loading, signIn, signUp, signOut, resetPassword }}>
+    <AuthContext.Provider value={{ session, user, loading, signIn, signUp, signOut, resetPassword, signInWithGoogle }}>
       {children}
     </AuthContext.Provider>
   );

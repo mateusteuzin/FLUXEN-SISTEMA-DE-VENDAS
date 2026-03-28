@@ -17,6 +17,8 @@ import { BrandLogo } from '@/components/BrandLogo';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTrial } from '@/hooks/use-trial';
+import { SubscriptionStatus } from '@/components/SubscriptionStatus';
 import { cn } from '@/lib/utils';
 
 interface NavItem {
@@ -80,6 +82,8 @@ function SidebarNav({
   onNavigate: () => void;
   onSignOut: () => void;
 }) {
+  const trial = useTrial();
+
   return (
     <div className="flex min-h-full flex-col">
       <div className="border-b border-white/10 px-4 py-6">
@@ -88,15 +92,11 @@ function SidebarNav({
           onClick={onNavigate}
           className="flex w-full justify-center rounded-[28px] transition-transform duration-200 hover:scale-[1.01]"
         >
-          <BrandLogo className="h-[118px] w-full max-w-[222px]" />
+          <BrandLogo className="h-[140px] w-full max-w-[240px] brightness-0 invert" />
         </Link>
 
-        <div className="mt-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-500">
-            Usuário logado
-          </p>
-          <p className="mt-1 truncate text-sm text-slate-300">{userEmail}</p>
-        </div>
+        {/* Badge de Assinatura */}
+        <SubscriptionStatus trial={trial} className="mt-4" />
       </div>
 
       <div className="flex-1 px-3 py-4">
@@ -120,18 +120,18 @@ function SidebarNav({
                     to={item.to}
                     onClick={onNavigate}
                     className={cn(
-                      'group flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition-all duration-200',
+                      'group flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition-all duration-300',
                       active
-                        ? 'bg-gradient-to-r from-blue-500/20 to-blue-500/5 text-white ring-1 ring-inset ring-blue-400/30'
-                        : 'text-slate-300 hover:bg-white/5 hover:text-white',
+                        ? 'bg-gradient-to-r from-blue-600/20 to-blue-500/5 text-white ring-1 ring-inset ring-blue-500/30'
+                        : 'text-slate-400 hover:bg-white/5 hover:text-white',
                     )}
                   >
                     <span
                       className={cn(
                         'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-all duration-200',
                         active
-                          ? 'border-blue-400/30 bg-blue-500/15 text-blue-300'
-                          : 'border-white/5 bg-white/5 text-slate-400 group-hover:border-white/10 group-hover:bg-white/10 group-hover:text-white',
+                          ? 'border-blue-500/30 bg-blue-500/20 text-blue-400 shadow-lg shadow-blue-500/10'
+                          : 'border-white/5 bg-white/5 text-slate-500 group-hover:border-white/10 group-hover:bg-white/10 group-hover:text-white',
                       )}
                     >
                       <item.icon className="h-5 w-5" />
@@ -188,7 +188,7 @@ export default function AppSidebar() {
       <div className="sticky top-0 z-20 border-b border-slate-200/70 bg-white/90 backdrop-blur md:hidden">
         <div className="flex items-center justify-between px-4 py-4">
           <Link to="/dashboard" onClick={handleNavigate}>
-            <BrandLogo className="h-[68px] w-[192px]" />
+            <BrandLogo className="h-[96px] w-[240px]" />
           </Link>
           <Button
             variant="outline"

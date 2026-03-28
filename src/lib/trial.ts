@@ -1,6 +1,6 @@
 const TRIAL_KEY = (userId: string) => `fluxen.trial.${userId}`;
-const TRIAL_DAYS = 7;
-const WARNING_DAYS = 5;
+const TRIAL_DAYS = 30; // Alterado de 7 para 30 dias
+const WARNING_DAYS = 7; // Aviso quando faltarem 7 dias
 
 interface TrialData {
   criadoEm: string;
@@ -15,7 +15,16 @@ export interface TrialStatus {
   isExpired: boolean;
   isWarning: boolean;
   isPaid: boolean;
+  expirationDate: string; // Ex: "28/04/2026"
 }
+
+const formatDate = (date: Date): string => {
+  return date.toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
+};
 
 export const initTrial = (userId: string): void => {
   if (!isBrowser()) return;
@@ -36,15 +45,35 @@ export const getTrialStatus = (userId: string): TrialStatus => {
   const data = getTrialData(userId);
 
   if (!data) {
-    return { daysUsed: 0, daysLeft: TRIAL_DAYS, isExpired: false, isWarning: false, isPaid: false };
+    const defaultExp = new Date();
+    defaultExp.setDate(defaultExp.getDate() + TRIAL_DAYS);
+    return {
+      daysUsed: 0,
+      daysLeft: TRIAL_DAYS,
+      isExpired: false,
+      isWarning: false,
+      isPaid: false,
+      expirationDate: formatDate(defaultExp),
+    };
   }
 
+  const criadoEmDate = new Date(data.criadoEm);
+  const expDate = new Date(criadoEmDate);
+  expDate.setDate(expDate.getDate() + TRIAL_DAYS);
+
   if (data.pagou) {
-    return { daysUsed: 0, daysLeft: Infinity, isExpired: false, isWarning: false, isPaid: true };
+    return {
+      daysUsed: 0,
+      daysLeft: Infinity,
+      isExpired: false,
+      isWarning: false,
+      isPaid: true,
+      expirationDate: 'Vitalício / Pro',
+    };
   }
 
   const daysUsed = Math.floor(
-    (Date.now() - new Date(data.criadoEm).getTime()) / (1000 * 60 * 60 * 24),
+    (Date.now() - criadoEmDate.getTime()) / (1000 * 60 * 60 * 24),
   );
   const daysLeft = Math.max(0, TRIAL_DAYS - daysUsed);
 
@@ -52,8 +81,9 @@ export const getTrialStatus = (userId: string): TrialStatus => {
     daysUsed,
     daysLeft,
     isExpired: daysUsed >= TRIAL_DAYS,
-    isWarning: daysUsed >= WARNING_DAYS && daysUsed < TRIAL_DAYS,
+    isWarning: daysLeft <= WARNING_DAYS && daysLeft > 0,
     isPaid: false,
+    expirationDate: formatDate(expDate),
   };
 };
 
@@ -63,3 +93,4 @@ export const markTrialAsPaid = (userId: string): void => {
   if (!data) return;
   localStorage.setItem(TRIAL_KEY(userId), JSON.stringify({ ...data, pagou: true }));
 };
+

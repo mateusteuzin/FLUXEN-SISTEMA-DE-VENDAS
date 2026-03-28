@@ -10,7 +10,7 @@ export function BrandLogo({ className }: BrandLogoProps) {
       <img
         src="/fluxen.png"
         alt="FLUXEN"
-        className="h-full w-full scale-[1.28] object-contain object-center drop-shadow-[0_12px_24px_rgba(15,23,42,0.18)]"
+        className="h-full w-full scale-[1.50] object-contain object-center drop-shadow-[0_12px_32px_rgba(15,23,42,0.22)]"
       />
     </div>
   );
