@@ -35,7 +35,7 @@ const navGroups: NavGroup[] = [
   {
     label: 'Gestão',
     items: [
-      { label: 'Dashboard', to: '/', icon: LayoutDashboard },
+      { label: 'Dashboard', to: '/dashboard', icon: LayoutDashboard },
       { label: 'Vendas', to: '/vendas', icon: ShoppingCart },
       { label: 'Produtos', to: '/produtos', icon: Package },
       { label: 'Estoque', to: '/estoque', icon: Boxes },
@@ -58,7 +58,7 @@ const navGroups: NavGroup[] = [
 ];
 
 const matchesPath = (pathname: string, candidate: string) => {
-  if (candidate === '/') return pathname === '/';
+  if (candidate === '/dashboard') return pathname === '/dashboard';
   return pathname === candidate || pathname.startsWith(`${candidate}/`);
 };
 
@@ -84,7 +84,7 @@ function SidebarNav({
     <div className="flex min-h-full flex-col">
       <div className="border-b border-white/10 px-4 py-6">
         <Link
-          to="/"
+          to="/dashboard"
           onClick={onNavigate}
           className="flex w-full justify-center rounded-[28px] transition-transform duration-200 hover:scale-[1.01]"
         >
@@ -187,7 +187,7 @@ export default function AppSidebar() {
 
       <div className="sticky top-0 z-20 border-b border-slate-200/70 bg-white/90 backdrop-blur md:hidden">
         <div className="flex items-center justify-between px-4 py-4">
-          <Link to="/" onClick={handleNavigate}>
+          <Link to="/dashboard" onClick={handleNavigate}>
             <BrandLogo className="h-[68px] w-[192px]" />
           </Link>
           <Button

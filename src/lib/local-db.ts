@@ -237,6 +237,28 @@ export const signInLocal = (email: string, password: string): AppSession => {
   return session;
 };
 
+export const registerLocalUser = (email: string, password: string): void => {
+  const db = readDb();
+  const normalizedEmail = normalizeEmail(email);
+  const exists = db.users.some((item) => item.email === normalizedEmail);
+
+  if (exists) {
+    throw new Error('Ja existe uma conta com esse email.');
+  }
+
+  const now = new Date().toISOString();
+  const user: LocalUserRecord = {
+    id: generateId(),
+    email: normalizedEmail,
+    password,
+    created_at: now,
+  };
+
+  db.users.push(user);
+  ensureEmpresa(db, user.id);
+  writeDb(db);
+};
+
 export const signUpLocal = (email: string, password: string): AppSession => {
   const db = readDb();
   const normalizedEmail = normalizeEmail(email);

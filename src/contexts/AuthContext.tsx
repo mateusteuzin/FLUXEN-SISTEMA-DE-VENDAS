@@ -3,9 +3,9 @@ import { supabase } from '@/integrations/supabase/client';
 import { isLocalMode } from '@/lib/app-mode';
 import {
   getLocalSession,
+  registerLocalUser,
   signInLocal,
   signOutLocal,
-  signUpLocal,
   type AppSession,
   type AppUser,
 } from '@/lib/local-db';
@@ -17,6 +17,7 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
+  resetPassword: (email: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -77,7 +78,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     if (!supabase) {
-      throw new Error('Supabase não configurado.');
+      throw new Error('Supabase nao configurado.');
     }
 
     const { error } = await supabase.auth.signInWithPassword({ email, password });
@@ -86,14 +87,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signUp = async (email: string, password: string) => {
     if (isLocalMode) {
-      const nextSession = signUpLocal(email, password);
-      setSession(nextSession);
-      setUser(nextSession.user);
+      registerLocalUser(email, password);
       return;
     }
 
     if (!supabase) {
-      throw new Error('Supabase não configurado.');
+      throw new Error('Supabase nao configurado.');
     }
 
     const { error } = await supabase.auth.signUp({ email, password });
@@ -109,15 +108,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     if (!supabase) {
-      throw new Error('Supabase não configurado.');
+      throw new Error('Supabase nao configurado.');
     }
 
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
   };
 
+  const resetPassword = async (email: string) => {
+    if (isLocalMode) {
+      return;
+    }
+
+    if (!supabase) {
+      throw new Error('Supabase nao configurado.');
+    }
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    if (error) throw error;
+  };
+
   return (
-    <AuthContext.Provider value={{ session, user, loading, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{ session, user, loading, signIn, signUp, signOut, resetPassword }}>
       {children}
     </AuthContext.Provider>
   );
